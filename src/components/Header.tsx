@@ -35,7 +35,7 @@ function Header() {
         ) : (
           <div className="flex">
             <div className="px-4">
-              <Link to="/welcome">{t("REGISTER")}</Link>
+              <a href="https://www.themoviedb.org/signup">{t("REGISTER")}</a>
             </div>
             <Link to="/login">
               <Button data-cy="header-login" className="px-4">

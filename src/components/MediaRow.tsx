@@ -42,7 +42,7 @@ function MediaRow({ data, title }: MediaRowProps) {
           </button>
           <div
             ref={rowRef}
-            className="flex overflow-x-hidden snap-x snap-mandatory mx-8"
+            className="flex overflow-x-scroll scrollbar-hide snap-x snap-mandatory mx-8"
             data-cy="media-row"
           >
             {data
