@@ -32,7 +32,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="w-full overflow-x-hidden">
       <Routes>
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Watch />} />

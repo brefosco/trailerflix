@@ -126,8 +126,8 @@ function TrailerPlayer() {
               {videos ? (
                 <ReactPlayer
                   width="100%"
-                  muted={true}
-                  playing={false}
+                  muted={false}
+                  playing={true}
                   url={`https://www.youtube.com/watch?v=${videos[0]?.key}`}
                 />
               ) : loading ? (
