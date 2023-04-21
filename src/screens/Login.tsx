@@ -63,6 +63,11 @@ function Login() {
         ) : (
           <div>
             <h2 className="text-4xl py-8">{t("LOGIN")}</h2>
+            <p>
+              <a className="m-6" href="https://www.themoviedb.org/signup">
+                (Psst, you actually need a TMDB login, to register click here)
+              </a>
+            </p>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="text-black">
                 <input

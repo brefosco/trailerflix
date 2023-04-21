@@ -1,13 +1,15 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 export function useLocalStorage<T>(
   key: string,
   value: T,
-  handleLoad: (data: T) => void
+  handleLoad: (data: T) => void,
+  deps: React.DependencyList
 ) {
   useEffect((): void => {
     try {
       const dataFromLocalStorage = localStorage.getItem(key);
+
       if (dataFromLocalStorage) {
         const parsedDataFromLocalStorage = JSON.parse(dataFromLocalStorage);
         if (parsedDataFromLocalStorage) {
@@ -23,5 +25,5 @@ export function useLocalStorage<T>(
     if (value) {
       localStorage.setItem(key, JSON.stringify(value));
     }
-  }, [value]);
+  }, deps);
 }

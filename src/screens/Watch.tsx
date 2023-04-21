@@ -44,7 +44,8 @@ function Watch() {
   useLocalStorage<MediaItem[]>(
     "watched-media",
     watchedMedia,
-    handleLoadWatched
+    handleLoadWatched,
+    [watchedMedia]
   );
 
   useFetchMedia(
