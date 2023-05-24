@@ -10,11 +10,9 @@ import { useNavigate } from "react-router-dom";
 
 function PriceTitle() {
   return (
-    <div className="flex justify-around">
-      <div className="">
-        <DollarsIcon />
-        <p className="my-4">{t("PRICE")}</p>
-      </div>
+    <div className="mx-4">
+      <DollarsIcon />
+      <p className="my-4">{t("PRICE")}</p>
     </div>
   );
 }
@@ -23,7 +21,7 @@ function PriceContent() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <>
       <div className="flex my-28 text-center">
         <div className="w-1/2 text-2xl">
           <p>{t("CHOOSE_PLAN")}</p>
@@ -40,17 +38,15 @@ function PriceContent() {
         </div>
       </div>
       <PlansTable />
-    </div>
+    </>
   );
 }
 
 function CancelTitle() {
   return (
-    <div data-testid="cancel-title" className="flex justify-around">
-      <div className="">
-        <CancelIcon />
-        <p className="my-4">{t("CANCEL")}</p>
-      </div>
+    <div data-testid="cancel-title" className="mx-4">
+      <CancelIcon />
+      <p className="my-4">{t("CANCEL")}</p>
     </div>
   );
 }
@@ -80,11 +76,9 @@ function CancelContent() {
 
 function DevicesTitle() {
   return (
-    <div className="flex justify-around">
-      <div className="">
-        <DevicesIcon />
-        <p className="my-4">{t("DEVICES")}</p>
-      </div>
+    <div className="mt-3 mx-4">
+      <DevicesIcon />
+      <p className="my-4">{t("DEVICES")}</p>
     </div>
   );
 }
@@ -149,24 +143,22 @@ function Tabs() {
 
   return (
     <div>
-      <div>
-        <div className="flex">
-          {tabs.map(({ id, Title }) => (
-            <div
-              className={`w-1/3 text-2xl bg-[#111111] py-9 ${
-                activeTab !== id
-                  ? "text-[#595959]"
-                  : "border-x-0 border-b-2 border-[#0578FF]"
-              }`}
-              onClick={() => setActiveTab(id)}
-              key={id}
-            >
-              <Title />
-            </div>
-          ))}
-        </div>
+      <div className="flex">
+        {tabs.map(({ id, Title }) => (
+          <div
+            className={`w-1/3 text-2xl bg-[#111111] py-9 ${
+              activeTab !== id
+                ? "text-[#595959]"
+                : "border-x-0 border-b-2 border-[#0578FF]"
+            }`}
+            onClick={() => setActiveTab(id)}
+            key={id}
+          >
+            <Title />
+          </div>
+        ))}
       </div>
-      <div className="">
+      <div>
         {tabs.map(({ id, Content }) =>
           activeTab === id ? <Content key={id} /> : ""
         )}
