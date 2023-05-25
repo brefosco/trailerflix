@@ -12,6 +12,7 @@ import { store } from "./store";
 import Profile from "./screens/Profile";
 import { getRequestToken, selectUser } from "./slices/userSlice";
 import { useAppDispatch, useAppSelector } from "./hooks/redux";
+import Demo from "./screens/Demo";
 
 function AppWrapper() {
   return (
@@ -41,6 +42,7 @@ function App() {
         </Route>
         <Route path="welcome" element={<Home />} />
         <Route path="login" element={<Login />} />
+        <Route path="demo" element={<Demo />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
