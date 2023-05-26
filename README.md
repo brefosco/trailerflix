@@ -26,3 +26,10 @@ Use `yarn` to install the required packages:
 
 Use `yarn dev` to start the server:
 `yarn dev`
+
+
+### You need to configure a `.env` file with:
+```
+VITE_BASE_API_URL=
+VITE_TMDB_KEY=
+```

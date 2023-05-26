@@ -12,7 +12,7 @@ import DarkBackgroundWrapper from "../components/DarkBackgroundWrapper";
 import { MediaType } from "../types/media";
 import { useFetchMedia } from "../hooks/useFetchMedia";
 
-function Watch() {
+function Demo() {
   const dispatch = useAppDispatch();
   const requestStatus = useAppSelector(selectMediaStatus);
   const movies = useAppSelector(selectMovies);
@@ -48,4 +48,4 @@ function Watch() {
   );
 }
 
-export default Watch;
+export default Demo;
