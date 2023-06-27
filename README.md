@@ -4,10 +4,11 @@ This is a project that clones Netflix but only shows trailers of movies. It uses
 
 ## Features
 
-- Shows a list of trending movies.
+- Shows a list of trending movies and tv shows.
+- Plays the trailer of any of those movies/tv shows and shows the movie overview 
 - Allows you to mark movies as favorites and watched on TMDB.
 - Stores viewed movies and profile data (such as name and preferred language) on LocalStorage since they are not supported by the TMDB API.
-- Login persistence is not implemented, as this is just a test project and not necessary.
+- Login persistence is not implemented, as this is just a test project and it seemed unnecessary.
 
 ## How to run
 
