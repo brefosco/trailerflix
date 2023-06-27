@@ -4,6 +4,8 @@ This is a project that clones Netflix but only shows trailers of movies. It uses
 
 Demo: https://trailerflix-bruno.netlify.app/demo
 
+(To log in you can sign up [here](https://www.themoviedb.org/signup))
+
 ## Features
 
 - Shows a list of trending movies and tv shows.
