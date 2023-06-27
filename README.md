@@ -2,7 +2,7 @@
 
 This is a project that clones Netflix but only shows trailers of movies. It uses the TMDB API to fetch movie data.
 
-Demo: https://trailerflix-bruno.netlify.app/
+Demo: https://trailerflix-bruno.netlify.app/demo
 
 ## Features
 
