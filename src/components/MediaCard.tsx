@@ -1,7 +1,8 @@
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
-import { MediaItem } from "../types/media";
+import { MediaItem, MediaType } from "../types/media";
 import { useState } from "react";
+import { useApiDetailedMedia } from "../hooks/useApiDetailedMedia";
 
 interface MediaCardProps {
   media: MediaItem;
@@ -12,10 +13,11 @@ const baseImgUrl = "https://image.tmdb.org/t/p/original";
 function MediaCard({ media }: MediaCardProps) {
   const navigate = useNavigate();
   const [imageLoaded, setImageLoaded] = useState(false);
+  const { loading } = useApiDetailedMedia(media.id, media.media_type as MediaType);
 
   return (
     <>
-      {!imageLoaded && (
+      {loading || !imageLoaded && (
         <Skeleton
           width={170}
           height={250}
