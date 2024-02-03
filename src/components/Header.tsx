@@ -15,7 +15,7 @@ function Header() {
   return (
     <header className="flex justify-between text-white w-9/12 md:w-full">
       <div data-cy="header-home" className="font-semibold text-3xl my-5 mx-5">
-        <Link to="/">Home</Link>
+        <Link to="/watch">Home</Link>
       </div>
       <div className="py-4 w-1/4">
         {isLoggedIn ? (

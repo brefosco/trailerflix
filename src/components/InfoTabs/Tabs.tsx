@@ -29,7 +29,7 @@ function PriceContent() {
         <div className="w-1/2">
           <Button
             onClick={() => {
-              navigate("/login");
+              navigate("/watch");
             }}
             className="py-2 px-4"
           >
@@ -60,7 +60,7 @@ function CancelContent() {
         {t("NO_COMPROMISES")}
         <Button
           onClick={() => {
-            navigate("/login");
+            navigate("/watch");
           }}
           className="py-2 my-8 px-4"
         >
@@ -91,7 +91,7 @@ function DevicesContent() {
         <p>{t("WATCH_MOVIES_EVERYWHERE")}</p>
         <Button
           onClick={() => {
-            navigate("/login");
+            navigate("/watch");
           }}
           className="py-4 px-4"
         >
@@ -146,11 +146,10 @@ function Tabs() {
       <div className="flex">
         {tabs.map(({ id, Title }) => (
           <div
-            className={`w-1/3 text-2xl bg-[#111111] py-9 ${
-              activeTab !== id
-                ? "text-[#595959]"
-                : "border-x-0 border-b-2 border-[#0578FF]"
-            }`}
+            className={`w-1/3 text-2xl bg-[#111111] py-9 ${activeTab !== id
+              ? "text-[#595959]"
+              : "border-x-0 border-b-2 border-[#0578FF]"
+              }`}
             onClick={() => setActiveTab(id)}
             key={id}
           >

@@ -29,7 +29,7 @@ function Login() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/");
+      navigate("/watch");
     }
   }, [isLoggedIn]);
 
