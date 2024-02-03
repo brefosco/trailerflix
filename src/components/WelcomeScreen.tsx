@@ -22,7 +22,7 @@ function WelcomeScreen() {
           <div className="py-20">
             <Button
               onClick={() => {
-                navigate("/login");
+                navigate("/watch");
               }}
               className="py-2 px-4"
             >

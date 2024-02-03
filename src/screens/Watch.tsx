@@ -31,11 +31,15 @@ function Watch() {
   };
 
   const handleFetchMedia = (mediaType: MediaType) => {
-    dispatch(fetchMedia(mediaType));
+    // dispatch(fetchMedia(mediaType));
+    const media = mediaType === MediaType.Movie ? movies : tvShows;
+    if (media.length === 0) {
+      dispatch(fetchMedia(mediaType));
+    }
   };
 
   const handleFetchFavoriteMedia = (mediaType: MediaType) => {
-    if (accountInfo?.id) {
+    if (accountInfo?.id && favoriteMovies.length === 0 && favoriteTV.length === 0) {
       const accountId = accountInfo.id;
       dispatch(getFavoriteMedia({ accountId, sessionId, mediaType }));
     }
@@ -69,43 +73,47 @@ function Watch() {
     <DarkBackgroundWrapper>
       <Header />
       <div className="">
-        {isLoggedIn ? (
-          <>
-            {requestStatus === "loading" ? (
-              <div className="mx-8 py-4" data-cy="watch-loading">
-                {t("LOADING")}
-              </div>
-            ) : (
-              <>
-                <div>
-                  <MediaRow title={t("WATCHED_MEDIA")} data={watchedMedia} />
-                </div>
-                <br />
-                <div>
-                  <MediaRow
-                    title={t("FAVORITE_MOVIES")}
-                    data={favoriteMoviesWithType}
-                  />
-                </div>
-                <br />
-                <div>
-                  <MediaRow
-                    title={t("FAVORITE_TV")}
-                    data={favoriteTVWithType}
-                  />
-                </div>
-                <br />
-                <div>
-                  <MediaRow title={t("POPULAR_MOVIES")} data={movies} />
-                </div>
-                <br />
-                <div>
-                  <MediaRow title={t("POPULAR_TV")} data={tvShows} />
-                </div>
-              </>
-            )}
+        <>
+          <div>
+            <MediaRow
+              title={t("WATCHED_MEDIA") ?? ""}
+              data={watchedMedia}
+            />
+          </div>
+          <br />
+          {isLoggedIn && <>
+            <div>
+              <MediaRow
+                title={t("FAVORITE_MOVIES") ?? ""}
+                data={favoriteMoviesWithType}
+              />
+            </div>
+            <br />
+            <div>
+              <MediaRow
+                title={t("FAVORITE_TV") ?? ""}
+                data={favoriteTVWithType}
+              />
+            </div>
+            <br />
           </>
-        ) : null}
+          }
+          <div>
+            <MediaRow title={t("POPULAR_MOVIES") ??
+              ""} data={movies} />
+          </div>
+          <br />
+          <div>
+            <MediaRow title={t("POPULAR_TV") ?? ""} data={tvShows} />
+          </div>
+        </>
+        {requestStatus === "loading" ? (
+          <div className="mx-8 py-4" data-cy="watch-loading">
+            {t("LOADING")}
+          </div>
+        ) : (
+          null
+        )}
         <br />
       </div>
     </DarkBackgroundWrapper>

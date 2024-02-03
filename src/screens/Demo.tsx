@@ -22,7 +22,7 @@ function Demo() {
     dispatch(fetchMedia(mediaType));
   };
 
-  useFetchMedia(handleFetchMedia, () => {}, undefined, requestStatus);
+  useFetchMedia(handleFetchMedia, () => { }, undefined, requestStatus);
 
   return (
     <DarkBackgroundWrapper>
@@ -35,11 +35,11 @@ function Demo() {
         ) : (
           <>
             <div>
-              <MediaRow title={t("POPULAR_MOVIES")} data={movies} />
+              <MediaRow title={t("POPULAR_MOVIES") ?? ""} data={movies} />
             </div>
             <br />
             <div>
-              <MediaRow title={t("POPULAR_TV")} data={tvShows} />
+              <MediaRow title={t("POPULAR_TV") ?? ""} data={tvShows} />
             </div>
           </>
         )}
