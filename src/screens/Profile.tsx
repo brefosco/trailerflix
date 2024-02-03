@@ -41,7 +41,7 @@ function Profile() {
     }
     const lan = getLanguage();
     if (lan !== data.language) i18n.changeLanguage(data.language);
-    navigate("/");
+    navigate("/watch");
   };
 
   const getLanguage = () => i18n.language || window.localStorage.i18nextLng;

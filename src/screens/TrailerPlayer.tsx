@@ -1,11 +1,9 @@
 import ReactPlayer from "react-player";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import DarkBackgroundWrapper from "../components/DarkBackgroundWrapper";
 import Header from "../components/Header";
 import { useApiDetailedMedia } from "../hooks/useApiDetailedMedia";
 import {
-  DetailedMovie,
-  DetailedTVShow,
   MediaType,
   Video,
 } from "../types/media";
@@ -20,28 +18,20 @@ import { t } from "i18next";
 import { selectUser } from "../slices/userSlice";
 import AddFavoriteButton from "../components/AddFavoriteButton";
 import AddWatchedButton from "../components/AddWatchedButton";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
+import { BackIcon } from "../components/Icons";
 
-const getMovieTeasersAndTrailers = ({
-  videos,
-}: DetailedMovie | DetailedTVShow) => {
-  if (videos) {
-    const trailersAndTeasers = videos.results.filter((res: Video) => {
-      return res.type === "Trailer" || res.type === "Teaser";
-    });
 
-    return trailersAndTeasers;
-  }
-  return false;
-};
 
 function TrailerPlayer() {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const media = location.state;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { title, overview, media_type, id, name } = media;
   const { data, loading } = useApiDetailedMedia(id, media_type);
-  const videos = getMovieTeasersAndTrailers(data);
+  // const videos = getMovieTeasersAndTrailers(data);
   const dispatch = useAppDispatch();
   const { favoriteMovies, favoriteTV, watchedMedia } =
     useAppSelector(selectMedia);
@@ -53,6 +43,18 @@ function TrailerPlayer() {
 
   const foundWatchedMedia = watchedMedia?.find((media) => media.id === id);
 
+  const getMovieTeasersAndTrailers = useMemo(() => {
+    if (data?.videos) {
+      const trailersAndTeasers = data.videos.results.filter((res: Video) => {
+        return res.type === "Trailer" || res.type === "Teaser";
+      });
+
+      return trailersAndTeasers;
+    }
+    return [];
+  }, [data]);
+
+  const videos = getMovieTeasersAndTrailers;
   const handleMarkAsFavorite = () => {
     if (accountInfo)
       dispatch(
@@ -87,6 +89,10 @@ function TrailerPlayer() {
     dispatch(removeFromWatched(media));
   };
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -98,9 +104,14 @@ function TrailerPlayer() {
         {location.state ? (
           <div>
             <div className="flex justify-between mt-10 px-8 py-4">
-              <h3 className="font-bold text-2xl" data-cy="media-title">
-                {media_type === MediaType.Movie ? title : name}
-              </h3>
+              <div className="flex">
+                <button onClick={handleBack} className="mr-10">
+                  <BackIcon />
+                </button>
+                <h3 className="font-bold text-2xl mt-1" data-cy="media-title">
+                  {media_type === MediaType.Movie ? title : name}
+                </h3>
+              </div>
               <div className="flex">
                 <div className="my-1 mx-4">
                   <AddWatchedButton
@@ -109,13 +120,15 @@ function TrailerPlayer() {
                     handleRemove={handleRemoveFromWatched}
                   />
                 </div>
-                <div className="mx-4">
-                  <AddFavoriteButton
-                    foundFavoriteMedia={!!foundFavoriteMedia}
-                    handleAdd={handleMarkAsFavorite}
-                    handleRemove={handleRemoveFromFavorites}
-                  />
-                </div>
+                {sessionId &&
+                  <div className="mx-4">
+                    <AddFavoriteButton
+                      foundFavoriteMedia={!!foundFavoriteMedia}
+                      handleAdd={handleMarkAsFavorite}
+                      handleRemove={handleRemoveFromFavorites}
+                    />
+                  </div>
+                }
               </div>
             </div>
             <section className="px-8 py-16">
@@ -127,7 +140,8 @@ function TrailerPlayer() {
                 <ReactPlayer
                   width="100%"
                   muted={false}
-                  playing={true}
+                  // playing={true}
+                  playing={false}
                   url={`https://www.youtube.com/watch?v=${videos[0]?.key}`}
                 />
               ) : loading ? (
