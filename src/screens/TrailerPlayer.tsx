@@ -23,10 +23,12 @@ function TrailerPlayer() {
   const navigate = useNavigate();
 
   const media = location.state;
-  if (!media) {
-    navigate("/watch");
-    return;
-  }
+
+  useEffect(() => {
+    if (!media) {
+      navigate("/watch");
+    }
+  }, []);
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { title, overview, media_type, id, name } = media;
   const { data, loading } = useApiDetailedMedia(id, media_type);
