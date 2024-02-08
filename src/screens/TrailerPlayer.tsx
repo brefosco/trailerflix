@@ -1,5 +1,5 @@
 import ReactPlayer from "react-player";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import DarkBackgroundWrapper from "../components/DarkBackgroundWrapper";
 import Header from "../components/Header";
 import { useApiDetailedMedia } from "../hooks/useApiDetailedMedia";
@@ -24,17 +24,18 @@ function TrailerPlayer() {
 
   const media = location.state;
 
+  console.log("media in trailer");
+  console.log(media);
+
+  useEffect(() => {
+    if (!media) {
+      navigate("/watch");
+    }
+  }, [media, navigate]);
+
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
-
-  if (!media) {
-    return (
-      <div>
-        <Navigate to="/watch" />
-      </div>
-    );
-  }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { title, overview, media_type, id, name } = media;
@@ -104,7 +105,7 @@ function TrailerPlayer() {
     <DarkBackgroundWrapper>
       <Header />
       <div>
-        {media ? (
+        {location.state ? (
           <div>
             <div className="flex justify-between mt-10 px-8 py-4">
               <div className="flex">
