@@ -3,10 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import DarkBackgroundWrapper from "../components/DarkBackgroundWrapper";
 import Header from "../components/Header";
 import { useApiDetailedMedia } from "../hooks/useApiDetailedMedia";
-import {
-  MediaType,
-  Video,
-} from "../types/media";
+import { MediaType, Video } from "../types/media";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import {
   handleFavorites,
@@ -21,17 +18,18 @@ import AddWatchedButton from "../components/AddWatchedButton";
 import { useEffect, useMemo } from "react";
 import { BackIcon } from "../components/Icons";
 
-
-
 function TrailerPlayer() {
   const location = useLocation();
   const navigate = useNavigate();
 
   const media = location.state;
+  if (!media) {
+    navigate("/watch");
+    return;
+  }
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { title, overview, media_type, id, name } = media;
   const { data, loading } = useApiDetailedMedia(id, media_type);
-  // const videos = getMovieTeasersAndTrailers(data);
   const dispatch = useAppDispatch();
   const { favoriteMovies, favoriteTV, watchedMedia } =
     useAppSelector(selectMedia);
@@ -101,7 +99,7 @@ function TrailerPlayer() {
     <DarkBackgroundWrapper>
       <Header />
       <div>
-        {location.state ? (
+        {media ? (
           <div>
             <div className="flex justify-between mt-10 px-8 py-4">
               <div className="flex">
@@ -120,7 +118,7 @@ function TrailerPlayer() {
                     handleRemove={handleRemoveFromWatched}
                   />
                 </div>
-                {sessionId &&
+                {sessionId && (
                   <div className="mx-4">
                     <AddFavoriteButton
                       foundFavoriteMedia={!!foundFavoriteMedia}
@@ -128,7 +126,7 @@ function TrailerPlayer() {
                       handleRemove={handleRemoveFromFavorites}
                     />
                   </div>
-                }
+                )}
               </div>
             </div>
             <section className="px-8 py-16">

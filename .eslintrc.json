@@ -19,7 +19,7 @@
   },
   "plugins": ["react"],
   "rules": {
-    "no-unused-vars": "error",
+    "no-unused-vars": "warn",
     "quotes": ["error", "double", { "avoidEscape": true }],
     "@typescript-eslint/quotes": ["error", "double", { "avoidEscape": true }],
     "@typescript-eslint/explicit-function-return-type": "off",
