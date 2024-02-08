@@ -1,5 +1,5 @@
 import ReactPlayer from "react-player";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import DarkBackgroundWrapper from "../components/DarkBackgroundWrapper";
 import Header from "../components/Header";
 import { useApiDetailedMedia } from "../hooks/useApiDetailedMedia";
@@ -25,10 +25,17 @@ function TrailerPlayer() {
   const media = location.state;
 
   useEffect(() => {
-    if (!media) {
-      navigate("/watch");
-    }
+    window.scroll(0, 0);
   }, []);
+
+  if (!media) {
+    return (
+      <div>
+        <Navigate to="/watch" />
+      </div>
+    );
+  }
+
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { title, overview, media_type, id, name } = media;
   const { data, loading } = useApiDetailedMedia(id, media_type);
@@ -93,10 +100,6 @@ function TrailerPlayer() {
     navigate(-1);
   };
 
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
-
   return (
     <DarkBackgroundWrapper>
       <Header />
@@ -140,8 +143,7 @@ function TrailerPlayer() {
                 <ReactPlayer
                   width="100%"
                   muted={false}
-                  // playing={true}
-                  playing={false}
+                  playing={true}
                   url={`https://www.youtube.com/watch?v=${videos[0]?.key}`}
                 />
               ) : loading ? (
